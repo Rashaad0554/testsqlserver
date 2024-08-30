@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"log"
@@ -9,11 +10,11 @@ import (
 )
 
 // SQL Server connection details
-var server = "localhost"       // Your SQL Server hostname
-var mssql_port = 1433          // Default SQL Server port
-var user = "UofGIoT"           // Your SQL Server username
-var passwd = "Iq1sAd7AVVK5UUR" // Your SQL Server password
-var database = "emqx_data_test"     // Your database name
+var server = "localhost"        // Your SQL Server hostname
+var mssql_port = 1433           // Default SQL Server port
+var user = "UofGIoT"            // Your SQL Server username
+var passwd = "Iq1sAd7AVVK5UUR"  // Your SQL Server password
+var database = "emqx_data_test" // Your database name
 
 var db *sql.DB
 
@@ -51,11 +52,19 @@ func main() {
 	} else {
 		fmt.Printf("msg1 added successfully!\n")
 	}
+
 	msg2 := Message{"topic2", "2000"}
 	if tableInsert(db, msg2) == 0 {
 		fmt.Printf("Uh oh 2!")
 	} else {
 		fmt.Printf("msg2 added successfully!\n")
+	}
+
+	msg3 := Message{"topic1", "3000"}
+	if tableInsert(db, msg3) == 0 {
+		fmt.Printf("Uh oh 3!")
+	} else {
+		fmt.Printf("msg3 added successfully!\n")
 	}
 }
 
